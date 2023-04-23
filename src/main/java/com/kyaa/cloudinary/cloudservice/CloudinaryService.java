@@ -12,12 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 @Component
 public class CloudinaryService {
+    private final String cloudName = System.getenv("CLOUD_NAME");
+    private final String cloudApiKey = System.getenv("CLOUD_API_KEY");
+    private final String cloudApiSecret = System.getenv("CLOUD_API_SECRET");
 
     public String uploadImage(MultipartFile image) throws IOException {
         Map<String, Object> config = new HashMap();
-        config.put("cloud_name", "diy0nupq2");
-        config.put("api_key", "921181982415648");
-        config.put("api_secret", "_lZxqJWNBSfV9QP4gXBB02ZaFSM");
+        config.put("cloud_name", cloudName);
+        config.put("api_key", cloudApiKey);
+        config.put("api_secret", cloudApiSecret);
         Cloudinary cloudinary = new Cloudinary(config);
 
         Transformation transformation = new Transformation<>();
@@ -28,7 +31,7 @@ public class CloudinaryService {
                 .radius("max");
 
         Map<String, Object> parameters = new HashMap<>();
-//        parameters.put("public_id", "user_"+user.getId());
+
         parameters.put("folder", "user_images");
         parameters.put("transformation",transformation);
 
